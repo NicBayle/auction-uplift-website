@@ -322,13 +322,13 @@ function createPlaceholderImage(element, width, height, text) {
 
     // Background gradient
     const gradient = ctx.createLinearGradient(0, 0, width, height);
-    gradient.addColorStop(0, '#e04f9a');
-    gradient.addColorStop(1, '#8bc4ff');
+    gradient.addColorStop(0, '#C9A962');
+    gradient.addColorStop(1, '#8A8A85');
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, width, height);
 
     // Text
-    ctx.fillStyle = '#1f2f4a';
+    ctx.fillStyle = '#1A1A1A';
     ctx.font = 'bold 24px Inter, sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
@@ -396,8 +396,8 @@ faqItems.forEach((item, index) => {
 // Console Message
 // ===========================
 
-console.log('%c Auction Uplift ', 'background: #e04f9a; color: #0d182a; font-size: 20px; padding: 10px;');
-console.log('%c Website built to deliver exceptional fundraising experiences ', 'color: #8bc4ff; font-size: 12px;');
+console.log('%c Auction Uplift ', 'background: #C9A962; color: #1A1A1A; font-size: 20px; padding: 10px;');
+console.log('%c Website built to deliver exceptional fundraising experiences ', 'color: #8A8A85; font-size: 12px;');
 
 
 

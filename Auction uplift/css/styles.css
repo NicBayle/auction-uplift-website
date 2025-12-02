@@ -2,22 +2,22 @@
    CSS Variables & Reset
    =========================== */
 :root {
-    /* Logo-inspired palette */
-    --background: #1f2f4a;          /* Deep logo navy */
-    --surface: #27395a;             /* Lifted navy for cards */
-    --primary: #e04f9a;             /* Magenta accent */
-    --accent: #8bc4ff;              /* Sky blue highlight */
-    --text: #f3eee6;                /* Soft off-white */
+    /* Understated Elegance palette */
+    --background: #1A1A1A;          /* Charcoal Black */
+    --surface: #222222;             /* Soft Black */
+    --primary: #C9A962;             /* Warm Gold */
+    --accent: #8A8A85;              /* Warm Grey (accent/secondary) */
+    --text: #F5F5F0;                /* Warm Cream */
 
     /* Legacy variables for compatibility */
-    --primary-color: #27395a;
-    --secondary-color: #e04f9a;
-    --accent-color: #8bc4ff;
-    --text-dark: #f3eee6;
-    --text-light: rgba(243, 238, 230, 0.72);
-    --background-light: #27395a;
-    --white: #f3eee6;
-    --border-color: rgba(139, 196, 255, 0.22);
+    --primary-color: #222222;
+    --secondary-color: #C9A962;
+    --accent-color: #8A8A85;
+    --text-dark: #F5F5F0;
+    --text-light: #E8E8E3;
+    --background-light: #222222;
+    --white: #F5F5F0;
+    --border-color: #333333;
     --success-color: #4caf50;
     --error-color: #f44336;
 
@@ -137,12 +137,12 @@ button {
     color: var(--background);
     border-color: var(--primary);
     font-weight: 600;
-    box-shadow: 0 10px 30px rgba(224, 79, 154, 0.25);
+    box-shadow: 0 10px 30px rgba(201, 169, 98, 0.25);
 }
 
 .btn-primary:hover {
-    background: #f067b0;
-    border-color: #f067b0;
+    background: #d8be7a;
+    border-color: #d8be7a;
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
 }
@@ -166,11 +166,11 @@ button {
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(31, 47, 74, 0.9);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(139, 196, 255, 0.2);
+    background: rgba(26, 26, 26, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(51, 51, 51, 0.8);
     z-index: 1000;
-    padding: 6px 0;
+    padding: 8px 0;
     transition: var(--transition);
 }
 
@@ -192,7 +192,7 @@ button {
 }
 
 .nav-logo {
-    height: 120px;
+    height: 90px;
     width: auto;
     display: block;
 }
@@ -221,8 +221,8 @@ button {
 
 .nav-link {
     color: var(--text);
-    font-weight: 500;
-    font-size: 0.95rem;
+    font-weight: 600;
+    font-size: 1.02rem;
     position: relative;
 }
 
@@ -253,7 +253,7 @@ button {
 }
 
 .nav-link.cta-link:hover {
-    background: #f067b0;
+    background: #d8be7a;
 }
 
 /* ===========================
@@ -265,7 +265,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, rgba(31, 47, 74, 0.9), rgba(39, 57, 90, 0.88)),
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.92), rgba(34, 34, 34, 0.9)),
                 url('../images/Images/72feecb3-a8bc-49c8-abaf-90167d19b6b1.JPG') center/cover no-repeat;
     color: var(--text);
     text-align: center;
@@ -281,8 +281,8 @@ button {
     right: 0;
     bottom: 0;
     background:
-        radial-gradient(circle at 20% 50%, rgba(139, 196, 255, 0.12) 0%, transparent 45%),
-        radial-gradient(circle at 80% 80%, rgba(224, 79, 154, 0.18) 0%, transparent 50%);
+        radial-gradient(circle at 20% 50%, rgba(201, 169, 98, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 80% 80%, rgba(138, 138, 133, 0.12) 0%, transparent 50%);
     pointer-events: none;
 }
 
@@ -292,7 +292,7 @@ button {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(180deg, rgba(31, 47, 74, 0.5) 0%, rgba(31, 47, 74, 0.9) 100%);
+    background: linear-gradient(180deg, rgba(26, 26, 26, 0.55) 0%, rgba(26, 26, 26, 0.9) 100%);
     mix-blend-mode: multiply;
 }
 
@@ -313,7 +313,7 @@ button {
 
 .hero-subtitle {
     font-size: 1.25rem;
-    color: rgba(243, 238, 230, 0.9);
+    color: rgba(232, 232, 227, 0.9);
     margin-bottom: 40px;
     line-height: 1.8;
     animation: fadeInUp 0.8s ease 0.2s backwards;
