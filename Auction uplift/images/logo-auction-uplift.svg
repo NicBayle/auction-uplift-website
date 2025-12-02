@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 225 183" role="img" aria-labelledby="title">
+  <title id="title">Auction Uplift</title>
+  <rect width="225" height="183" fill="#1f2f4a" rx="12" />
+  <g fill="#f3eee6" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="36" text-anchor="start">
+    <text x="32" y="72">AUCTION</text>
+    <text x="32" y="116">UPLIFT</text>
+  </g>
+  <path d="M32 135 L154 125 L154 138 L32 148 Z" fill="#e04f9a" />
+</svg>

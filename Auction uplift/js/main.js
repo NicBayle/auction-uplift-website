@@ -1,3 +1,29 @@
+﻿// ===========================
+// Lenis Smooth Scroll
+// ===========================
+
+const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo
+    direction: 'vertical',
+    gestureDirection: 'vertical',
+    smooth: true,
+    smoothTouch: false,
+    touchMultiplier: 2
+});
+
+function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+}
+
+requestAnimationFrame(raf);
+
+// Update Lenis on window resize
+window.addEventListener('resize', () => {
+    lenis.resize();
+});
+
 // ===========================
 // Navigation Functionality
 // ===========================
@@ -156,7 +182,7 @@ function showFormMessage(message, type) {
 }
 
 // ===========================
-// Smooth Scroll for Anchor Links
+// Smooth Scroll for Anchor Links (Lenis Integration)
 // ===========================
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -170,9 +196,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
             if (target) {
                 const offsetTop = target.offsetTop - 80; // Account for fixed navbar
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
+                lenis.scrollTo(offsetTop, {
+                    duration: 1.5,
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
                 });
             }
         }
@@ -180,7 +206,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ===========================
-// Intersection Observer for Animations
+// Intersection Observer for Animations (Scroll direction aware)
 // ===========================
 
 const observerOptions = {
@@ -188,18 +214,73 @@ const observerOptions = {
     rootMargin: '0px 0px -100px 0px'
 };
 
+// Separate observer for portfolio items - triggers earlier
+const portfolioObserverOptions = {
+    threshold: 0.05,
+    rootMargin: '0px 0px 100px 0px'  // Triggers 100px before entering viewport
+};
+
+// Track scroll direction
+let lastScrollY = window.pageYOffset;
+let scrollingDown = true;
+
+window.addEventListener('scroll', () => {
+    const currentScrollY = window.pageYOffset;
+    scrollingDown = currentScrollY > lastScrollY;
+    lastScrollY = currentScrollY;
+}, { passive: true });
+
+// Observer that only animates when scrolling down
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) {
+        const rect = entry.target.getBoundingClientRect();
+        const isAboveViewport = rect.bottom < 0;
+
+        if (entry.isIntersecting && scrollingDown) {
+            // Animate when entering viewport while scrolling down
+            entry.target.classList.remove('scrolled-past');
             entry.target.classList.add('animate-in');
-            observer.unobserve(entry.target);
+        } else if (!entry.isIntersecting && !scrollingDown && isAboveViewport) {
+            // Only reset when scrolling up AND element is above viewport
+            entry.target.classList.remove('animate-in');
+            entry.target.classList.add('scrolled-past');
+        } else if (!entry.isIntersecting && entry.target.classList.contains('animate-in')) {
+            // When element leaves viewport (any direction), mark as scrolled-past
+            entry.target.classList.add('scrolled-past');
         }
     });
 }, observerOptions);
 
+const portfolioObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        const rect = entry.target.getBoundingClientRect();
+        const isAboveViewport = rect.bottom < 0;
+
+        if (entry.isIntersecting && scrollingDown) {
+            // Animate when entering viewport while scrolling down
+            entry.target.classList.remove('scrolled-past');
+            entry.target.classList.add('animate-in');
+        } else if (!entry.isIntersecting && !scrollingDown && isAboveViewport) {
+            // Only reset when scrolling up AND element is above viewport
+            entry.target.classList.remove('animate-in');
+            entry.target.classList.add('scrolled-past');
+        } else if (!entry.isIntersecting && entry.target.classList.contains('animate-in')) {
+            // When element leaves viewport (any direction), mark as scrolled-past
+            entry.target.classList.add('scrolled-past');
+        }
+    });
+}, portfolioObserverOptions);
+
 // Observe elements for animation
-const animateElements = document.querySelectorAll('.service-card, .portfolio-item, .timeline-item, .testimonial-card');
-animateElements.forEach(el => observer.observe(el));
+const serviceCards = document.querySelectorAll('.service-card');
+const portfolioItems = document.querySelectorAll('.portfolio-item');
+const timelineItems = document.querySelectorAll('.timeline-item');
+const testimonialCards = document.querySelectorAll('.testimonial-card');
+
+serviceCards.forEach(el => observer.observe(el));
+portfolioItems.forEach(el => portfolioObserver.observe(el));  // Use faster observer
+timelineItems.forEach(el => observer.observe(el));
+testimonialCards.forEach(el => observer.observe(el));
 
 // ===========================
 // Dynamic Year in Footer
@@ -241,13 +322,13 @@ function createPlaceholderImage(element, width, height, text) {
 
     // Background gradient
     const gradient = ctx.createLinearGradient(0, 0, width, height);
-    gradient.addColorStop(0, '#D4C5A9');
-    gradient.addColorStop(1, '#C9A962');
+    gradient.addColorStop(0, '#e04f9a');
+    gradient.addColorStop(1, '#8bc4ff');
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, width, height);
 
     // Text
-    ctx.fillStyle = '#0A0A0A';
+    ctx.fillStyle = '#1f2f4a';
     ctx.font = 'bold 24px Inter, sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
@@ -315,5 +396,8 @@ faqItems.forEach((item, index) => {
 // Console Message
 // ===========================
 
-console.log('%c Auction Uplift ', 'background: #8b7355; color: white; font-size: 20px; padding: 10px;');
-console.log('%c Website built with ❤️ for exceptional fundraising ', 'color: #666; font-size: 12px;');
+console.log('%c Auction Uplift ', 'background: #e04f9a; color: #0d182a; font-size: 20px; padding: 10px;');
+console.log('%c Website built to deliver exceptional fundraising experiences ', 'color: #8bc4ff; font-size: 12px;');
+
+
+
